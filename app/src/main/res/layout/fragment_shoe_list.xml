@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-
+        <!--Linear Layout-->
         <LinearLayout
             android:id="@+id/shoeListFragmentLayout"
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:padding="8dp">
 
             </LinearLayout>
-
+            <!--FloatingActionButton-->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabAddDetails"
                 android:layout_width="wrap_content"
