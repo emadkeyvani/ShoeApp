@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
     android:id="@+id/shoeListFragment"
-    android:title="Log Out"
+    android:title="@string/log_out"
     android:icon="@drawable/ic_round_logout_24"/>
 </menu>

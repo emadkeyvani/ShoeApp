@@ -1,5 +1,6 @@
 package com.keyvani.shoeapplication.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
@@ -9,7 +10,6 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.keyvani.shoeapplication.R
@@ -35,9 +35,10 @@ class ShoeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        shoeViewModel.shoeList.observe(viewLifecycleOwner, Observer { newShoeList ->
+        shoeViewModel.shoeList.observe(viewLifecycleOwner) { newShoeList ->
             updateShoeList(newShoeList)
-        })
+        }
+
         binding.apply {
 
             fabAddDetails.setOnClickListener {
@@ -48,7 +49,6 @@ class ShoeListFragment : Fragment() {
             }
 
             val menuHost: MenuHost = requireActivity()
-
             menuHost.addMenuProvider(object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.main_menu, menu)
@@ -66,12 +66,13 @@ class ShoeListFragment : Fragment() {
                     }
                 }
             }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateShoeList(shoesList: List<Shoe>) {
-        val shoesLayout =
-            binding.root.findViewById<LinearLayout>(R.id.shoeListLayout)
+        val shoesLayout = binding.root.findViewById<LinearLayout>(R.id.shoeListLayout)
         shoesList.forEach { shoe ->
 
             val lp = LinearLayout.LayoutParams(

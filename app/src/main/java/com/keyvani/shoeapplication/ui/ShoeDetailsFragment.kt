@@ -62,5 +62,4 @@ class ShoeDetailsFragment : Fragment() {
         return shoe
     }
 
-
 }

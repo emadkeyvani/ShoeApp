@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="sans-serif"
-        tools:text="@string/shoe_label"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/shoe_label" />
 
     <EditText
         android:id="@+id/edtShoeName"
@@ -80,6 +80,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSave" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

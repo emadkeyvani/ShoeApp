@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.RegisterFragment">
 
-
-    <!-- Avatar -->
     <ImageView
         android:id="@+id/imgUserAvatar"
         android:layout_width="120dp"
@@ -17,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--Name-->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiName"
         style="@style/CustomFilledBox"
@@ -32,14 +30,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtName"
             style="@style/TextViewLightStyle"
-            android:inputType="textPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:textSize="14sp" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
-    <!--Email-->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiEmail"
         style="@style/CustomFilledBox"
@@ -54,14 +52,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEmail"
             style="@style/TextViewLightStyle"
-            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
             android:textSize="14sp" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
-    <!--Password-->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiPassword"
         style="@style/CustomFilledBox"
@@ -77,15 +75,15 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtPassword"
-            android:inputType="numberPassword"
             style="@style/TextViewLightStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberPassword"
             android:textSize="14sp" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
-    <!--Submit-->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
         android:layout_width="wrap_content"
@@ -115,6 +113,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSignIn"
         app:layout_constraintTop_toBottomOf="@id/tiPassword" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

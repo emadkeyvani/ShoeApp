@@ -13,27 +13,25 @@ class WelcomeFragment : Fragment() {
 
     private lateinit var binding: FragmentWelcomeBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+
             btnLetsStart.setOnClickListener {
                 view.findNavController().navigate(
                     WelcomeFragmentDirections
                         .actionWelcomeFragmentToInstructionFragment()
                 )
             }
+
         }
     }
-
-
 }

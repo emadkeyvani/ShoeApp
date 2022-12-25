@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -22,9 +21,6 @@ class RegisterFragment : Fragment() {
 
     var doubleBackToExitPressedOnce = false
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +32,6 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
             btnSignUp.setOnClickListener {
                 val name = edtName.text.toString()
                 val email = edtEmail.text.toString()
@@ -49,7 +44,6 @@ class RegisterFragment : Fragment() {
                 }else{
                     Snackbar.make(it, getString(R.string.fillAllFields), Snackbar.LENGTH_SHORT).show()
                 }
-
             }
             btnSignIn.setOnClickListener {
                 val name = edtName.text.toString()
@@ -67,6 +61,7 @@ class RegisterFragment : Fragment() {
             }
         }
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback = object : OnBackPressedCallback(true) {
@@ -81,6 +76,5 @@ class RegisterFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
-
 
 }
