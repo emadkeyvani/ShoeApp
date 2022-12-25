@@ -1,10 +1,13 @@
 package com.keyvani.shoeapplication.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -16,6 +19,8 @@ import com.keyvani.shoeapplication.databinding.FragmentRegisterBinding
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
+
+    var doubleBackToExitPressedOnce = false
 
 
 
@@ -61,6 +66,20 @@ class RegisterFragment : Fragment() {
 
             }
         }
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (doubleBackToExitPressedOnce) {
+                    activity?.finish()
+                }
+                doubleBackToExitPressedOnce = true
+                Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+                Toast.makeText(requireContext(), "Double press to exit", Toast.LENGTH_SHORT).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
 

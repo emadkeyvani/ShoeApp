@@ -7,20 +7,21 @@ import android.widget.TextView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.keyvani.shoeapplication.R
 import com.keyvani.shoeapplication.databinding.FragmentShoeListBinding
+import com.keyvani.shoeapplication.model.Shoe
 import com.keyvani.shoeapplication.viewmodel.ShoeViewModel
 
 
 class ShoeListFragment : Fragment() {
     private lateinit var binding: FragmentShoeListBinding
 
-    lateinit var shoeViewModel: ShoeViewModel
+    private val shoeViewModel: ShoeViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -34,45 +35,10 @@ class ShoeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        shoeViewModel = ViewModelProvider(requireActivity())[ShoeViewModel::class.java]
-
+        shoeViewModel.shoeList.observe(viewLifecycleOwner, Observer { newShoeList ->
+            updateShoeList(newShoeList)
+        })
         binding.apply {
-
-            shoeViewModel.shoeList.observe(this@ShoeListFragment.viewLifecycleOwner, Observer { shoes ->
-                val shoeLayout: android.widget.LinearLayout = binding.shoeListLayout
-                shoes.forEach { shoe ->
-
-                    val lp = LinearLayout.LayoutParams(
-
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-
-                    )
-                    val shoeItemTextView: TextView =
-                        TextView(requireContext()).apply {
-                            lp.gravity = Gravity.START
-                            layoutParams = lp
-                        }
-
-                    shoeItemTextView.text = "${shoe.name + " "}  ${shoe.company + " "} ${shoe.size.toString()  +  " "} ${shoe.description + " "}"
-                    binding.shoeListLayout.addView(shoeItemTextView)
-                }
-
-
-
-            })
-
-
-
-
-
-
-
-
-
-
-
-
 
             fabAddDetails.setOnClickListener {
                 view.findNavController().navigate(
@@ -80,7 +46,9 @@ class ShoeListFragment : Fragment() {
                         .actionShoeListFragmentToShoeDetailsFragment()
                 )
             }
+
             val menuHost: MenuHost = requireActivity()
+
             menuHost.addMenuProvider(object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(R.menu.main_menu, menu)
@@ -98,8 +66,27 @@ class ShoeListFragment : Fragment() {
                     }
                 }
             }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
+    }
 
+    private fun updateShoeList(shoesList: List<Shoe>) {
+        val shoesLayout =
+            binding.root.findViewById<LinearLayout>(R.id.shoeListLayout)
+        shoesList.forEach { shoe ->
 
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+
+            )
+            val shoeItemTextView: TextView =
+                TextView(requireContext()).apply {
+                    lp.gravity = Gravity.START
+                    layoutParams = lp
+                }
+
+            shoeItemTextView.text = "${shoe.name + " "}  ${shoe.company + " "} ${shoe.size.toString() + " "} ${shoe.description + " "}"
+            shoesLayout.addView(shoeItemTextView)
         }
     }
 

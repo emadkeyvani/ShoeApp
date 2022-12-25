@@ -7,58 +7,29 @@ import com.keyvani.shoeapplication.model.Shoe
 
 class ShoeViewModel : ViewModel() {
 
-    private val _eventShoeAddFinish = MutableLiveData<Boolean>()
-    val eventShoeAddFinish: LiveData<Boolean>
-        get() = _eventShoeAddFinish
+    private val _shoeList = MutableLiveData<MutableList<Shoe>>()
 
-    private var _shoeAdd: MutableLiveData<Boolean> = MutableLiveData()
-    val shoeAdd: LiveData<Boolean>
-        get() = _shoeAdd
-
-    private var _shoeList = MutableLiveData<MutableList<Shoe>>()
-    val shoeList: MutableLiveData<MutableList<Shoe>>
+    val shoeList: LiveData<MutableList<Shoe>>
         get() = _shoeList
 
-    var shoeName: MutableLiveData<String> = MutableLiveData()
-
-
-    var shoeCompany: MutableLiveData<String> = MutableLiveData()
-
-    var shoeSize: MutableLiveData<String> = MutableLiveData()
-
-    var shoeDetail: MutableLiveData<String> = MutableLiveData()
+    private val initialShoeList = mutableListOf<Shoe>(
+        Shoe("Bolt", 42.0, "Skechers", "Men  shoes for running"),
+        Shoe("Sapphire", 41.5, "Adidas", "Men classic  shoes")
+    )
 
     init {
-        shoeList.value = mutableListOf()
-        shoeName.value = "UdacityShoe"
-        shoeCompany.value = "Udacity"
-        shoeSize.value = "11.0"
-        shoeDetail.value = "UdacityDetail"
-        _shoeAdd.value = true
-        _eventShoeAddFinish.value = true
-
+        _shoeList.value = mutableListOf()
+        initialList()
     }
 
-    fun onSaveDetail() {
-
-        val shoe = shoeSize.value?.let {
-            Shoe(
-                shoeName.value.toString(),
-                it.toDouble(),
-                shoeCompany.value.toString(),
-                shoeDetail.value.toString()
-            )
+    private fun initialList() {
+        initialShoeList.forEach { shoe: Shoe ->
+            addShoe(shoe)
         }
-        shoe?.let {
-            val updatedList = _shoeList.value
-            updatedList?.add(it)
-            shoeList.value = updatedList?.toMutableList()
-        }
-
     }
 
-    fun onChooseComplete() {
-        _eventShoeAddFinish.value = false
+    fun addShoe(shoe: Shoe) {
+        _shoeList.value?.add(shoe)
     }
 
 

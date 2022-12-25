@@ -20,10 +20,10 @@
     </style>
     <!--Text input layout-->
     <style name="CustomFilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="hintTextColor">@color/crayola</item>
-        <item name="boxStrokeColor">@color/crayola</item>
-        <item name="boxBackgroundColor">@color/gunmetal</item>
-        <item name="startIconTint">@color/philippineSilver</item>
+        <item name="hintTextColor">@color/chinesBlack</item>
+        <item name="boxStrokeColor">@color/chinesBlack</item>
+        <item name="boxBackgroundColor">@color/philippineSilver</item>
+        <item name="startIconTint">@color/chinesBlack</item>
     </style>
     <!--RoundedImgView-->
     <style name="RoundedImgView">
